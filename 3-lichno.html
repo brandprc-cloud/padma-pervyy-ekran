@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Падма · вариант 3 «Лично»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400&family=Commissioner:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--kamen:#ebe7e0;--kamen2:#e2ddd4;--grafit:#1c1c1a;--seryy:#5d5a54;--hvoya:#1f3a32;--hvoya2:#2c5245;--liniya:rgba(28,28,26,.16);
+  --disp:'Raleway',system-ui,sans-serif;--text:'Commissioner',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--kamen);color:var(--grafit);font-family:var(--text);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+.shapka{position:absolute;inset:0 0 auto 0;z-index:20;display:grid;grid-template-columns:1fr 1fr;pointer-events:none}
+.shapka>*{pointer-events:auto}
+.shapka .l{padding:26px clamp(16px,3vw,44px);display:flex;align-items:center;gap:12px;color:#f3f0ea;font-family:var(--disp);font-weight:400;font-size:15px;letter-spacing:.32em;text-transform:uppercase}
+.shapka .l img{width:30px;filter:brightness(0) invert(1);opacity:.9}
+.shapka .p{padding:26px clamp(16px,3vw,44px);display:flex;justify-content:flex-end;align-items:center;gap:32px;font-size:14px;font-weight:400}
+.shapka .p a:not(.knopka):hover{color:var(--hvoya2)}
+.knopka{display:inline-flex;align-items:center;gap:12px;font-family:var(--text);font-weight:500;font-size:15px;letter-spacing:.02em;padding:16px 28px;border-radius:100px;transition:background .3s,color .3s,border-color .3s}
+.knopka.hv{background:var(--hvoya);color:#f1efe9}
+.knopka.hv:hover{background:var(--hvoya2)}
+.knopka.ton{border:1px solid var(--liniya)}
+.knopka.ton:hover{border-color:var(--hvoya)}
+.shapka .knopka{padding:10px 20px;font-size:14px}
+
+/* первый экран: портрет и слово */
+.ekran1{display:grid;grid-template-columns:1fr 1fr;min-height:100svh}
+.portret{position:relative;overflow:hidden;background:#141413}
+.portret img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 0;transform-origin:60% 30%;will-change:transform}
+.portret::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 70%,rgba(0,0,0,.4) 100%)}
+.shtora{position:absolute;inset:0;background:var(--kamen);z-index:2;transform-origin:50% 0;transition:transform 1.6s cubic-bezier(.7,0,.2,1)}
+.zagruzheno .shtora{transform:scaleY(0)}
+.podpis{position:absolute;left:clamp(16px,3vw,44px);bottom:30px;z-index:3;color:#efece6;font-size:13px;letter-spacing:.06em;line-height:1.5}
+.podpis b{display:block;font-weight:500;font-size:15px;letter-spacing:.02em}
+
+.slovo{display:flex;flex-direction:column;justify-content:center;padding:120px clamp(16px,4.5vw,80px) 60px}
+.nadpis{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--seryy)}
+h1{font-family:var(--disp);font-weight:200;font-size:clamp(88px,11.5vw,200px);line-height:.9;letter-spacing:-.04em;margin:22px 0 34px;color:var(--grafit)}
+h1 span{display:inline-block;opacity:0;transform:translateY(.25em);filter:blur(8px);transition:opacity 1.2s,transform 1.2s cubic-bezier(.2,.8,.2,1),filter 1.2s}
+.zagruzheno h1 span{opacity:1;transform:none;filter:none}
+h1 .tochka{color:var(--hvoya2)}
+.vvod{max-width:470px;font-size:19px;line-height:1.55}
+.vvod b{font-weight:500}
+.knopki{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.priv{margin-top:44px;padding-top:22px;border-top:1px solid var(--liniya);display:flex;gap:16px;max-width:470px;font-size:14px;color:var(--seryy);line-height:1.5}
+.priv svg{flex:0 0 20px;margin-top:2px}
+.poyav{opacity:0;transform:translateY(14px);transition:opacity 1s,transform 1s}
+.zagruzheno .poyav{opacity:1;transform:none}
+.zagruzheno .poyav.z1{transition-delay:1s}.zagruzheno .poyav.z2{transition-delay:1.15s}.zagruzheno .poyav.z3{transition-delay:1.3s}
+
+/* второй экран */
+.ekran2{padding:150px clamp(16px,4.5vw,80px) 140px;background:var(--kamen2)}
+.tsitata{max-width:1100px;margin:0 auto;text-align:center}
+.tsitata p{font-family:var(--disp);font-weight:200;font-size:clamp(34px,4.6vw,72px);line-height:1.12;letter-spacing:-.025em}
+.tsitata p .sl{display:inline-block;opacity:.12;transition:opacity .5s}
+.tsitata p .sl.vid{opacity:1}
+.tsitata .kto{margin-top:30px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--seryy)}
+.pravila{max-width:1180px;margin:120px auto 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--liniya)}
+.pravilo{padding:44px 40px 10px 0}
+.pravilo+.pravilo{padding-left:40px;border-left:1px solid var(--liniya)}
+.pravilo .n{font-family:var(--disp);font-weight:200;font-size:64px;line-height:1;color:var(--hvoya2)}
+.pravilo h3{font-family:var(--text);font-weight:500;font-size:21px;margin:22px 0 12px;letter-spacing:-.005em}
+.pravilo p{font-size:16px;color:#46443f}
+.metod{max-width:1180px;margin:90px auto 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px}
+.metod .z{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--seryy);margin-right:12px}
+.metod span.t{padding:10px 18px;border:1px solid var(--liniya);border-radius:100px;font-size:15px}
+.metod .knopka{margin-left:auto}
+
+.plashka{display:block;text-align:center;font-size:13px;padding:22px 16px;background:#000;color:#ddd}
+.plashka a{text-decoration:underline}
+
+@media (max-width:1000px){
+  .shapka .p a:not(.knopka){display:none}
+  .pravila{grid-template-columns:1fr}
+  .pravilo,.pravilo+.pravilo{padding:34px 0 0;border-left:0}
+  .pravilo+.pravilo{margin-top:34px;border-top:1px solid var(--liniya)}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .shapka{grid-template-columns:1fr auto}
+  .shapka .l,.shapka .p{padding:16px}
+  .shapka .knopka{background:rgba(241,239,233,.92);color:var(--hvoya)}
+  .ekran1{grid-template-columns:1fr;min-height:auto}
+  .portret{height:58svh}
+  .portret img{object-position:64% 0}
+  .podpis{bottom:20px;left:16px}
+  .slovo{padding:26px 16px 64px}
+  h1{font-size:28vw;margin:10px 0 18px}
+  .vvod{font-size:17px}
+  .knopki .knopka{flex:1 1 100%;justify-content:center}
+  .ekran2{padding:90px 16px 90px}
+  .pravila{margin-top:70px}
+  .metod{margin-top:60px}
+  .metod .knopka{margin-left:0;width:100%;justify-content:center;margin-top:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .shtora{display:none}
+  h1 span,.poyav{transition:none!important;opacity:1!important;transform:none!important;filter:none!important}
+}
+</style>
+</head>
+<body>
+<header class="shapka">
+  <a class="l" href="#"><img src="img/znak.svg" alt="">Падма</a>
+  <nav class="p"><a href="#">Подбор руководителей</a><a href="#">Подход</a><a href="#">Контакты</a><a class="knopka hv" href="#">Обсудить задачу</a></nav>
+</header>
+
+<section class="ekran1">
+  <div class="portret" id="portret">
+    <picture><source srcset="img/viktoriya-chb.webp" type="image/webp"><img src="img/viktoriya-chb.jpg" alt="Виктория Головнёва, основатель бюро Падма" fetchpriority="high"></picture>
+    <div class="shtora"></div>
+    <div class="podpis poyav z3"><b>Виктория Головнёва</b>основатель бюро · магистр психологии, НИУ ВШЭ</div>
+  </div>
+  <div class="slovo">
+    <div class="nadpis poyav z1">Бюро подбора руководителей · Москва и весь мир</div>
+    <h1><span>Лично</span><span class="tochka">.</span></h1>
+    <p class="vvod poyav z1">Кандидата в руководители до вас видит не только рекрутер. <b>Финальное интервью проводит психолог — основатель бюро Виктория Головнёва.</b></p>
+    <div class="knopki poyav z2"><a class="knopka hv" href="#">Обсудить задачу →</a><a class="knopka ton" href="#pravila">Как мы работаем</a></div>
+    <div class="priv poyav z3"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="8.5" width="13" height="9" rx="1.5"/><path d="M6.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5"/></svg><span>Поиск ведём от имени бюро. Название вашей компании кандидатам называем, только когда вы разрешите.</span></div>
+  </div>
+</section>
+
+<section class="ekran2" id="pravila">
+  <div class="tsitata">
+    <p id="tsitata">«Мы выбираем людей не только по компетенциям, которые в резюме».</p>
+    <div class="kto">Виктория Головнёва</div>
+  </div>
+  <div class="pravila">
+    <div class="pravilo"><div class="n">1</div><h3>Эксклюзивно</h3><p>Ведём поиск одни: исполнителя, критерии и условия закрепляем до старта. Так мы можем выделить команду и время на исследование рынка.</p></div>
+    <div class="pravilo"><div class="n">2</div><h3>От 18 % дохода кандидата</h3><p>Цена — от доли годового фиксированного дохода кандидата до НДФЛ. Предоплата засчитывается в гонорар.</p></div>
+    <div class="pravilo"><div class="n">3</div><h3>Гарантия 3 месяца</h3><p>Одна гарантийная замена входит в стоимость — на условиях договора.</p></div>
+  </div>
+  <div class="metod">
+    <span class="z">Подход бюро</span>
+    <span class="t">Профессиональный рекрутмент</span><span class="t">Системная психодинамика</span><span class="t">Юнгианская психология</span><span class="t">Спиральная динамика</span>
+    <a class="knopka hv" href="#">Обсудить задачу →</a>
+  </div>
+</section>
+
+<div class="plashka">Вариант 3 из 3 · <a href="./">все варианты</a></div>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('zagruzheno')})});
+  var tiho=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // портрет чуть медленнее прокрутки
+  var img=document.querySelector('#portret img');
+  if(!tiho) addEventListener('scroll',function(){ var y=scrollY; if(y<innerHeight*1.2) img.style.transform='scale('+(1+y/innerHeight*.08)+')'; },{passive:true});
+
+  // цитата проявляется словами по мере прокрутки
+  var t=document.getElementById('tsitata');
+  t.innerHTML=t.textContent.split(' ').map(function(w){return '<span class="sl">'+w+'</span>'}).join(' ');
+  var sl=t.querySelectorAll('.sl');
+  function cit(){
+    var r=t.getBoundingClientRect(), vh=innerHeight;
+    var p=tiho?1:Math.min(1,Math.max(0,(vh*.9-r.top)/(vh*.55)));
+    var n=Math.round(p*sl.length);
+    sl.forEach(function(s,i){s.classList.toggle('vid',i<n)});
+  }
+  addEventListener('scroll',cit,{passive:true}); cit();
+})();
+</script>
+</body>
+</html>

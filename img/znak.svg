@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 100" fill="none" color="#985e3d" class="brand-mark" aria-hidden="true">
+  <title>Семенная коробочка лотоса — PADMA</title>
+  <desc>Наклонённая чашечка с семью семенами и тонким изогнутым стеблем. Справа лежат ещё три семени, повёрнутые под разными углами.</desc>
+  <path d="M45.5 51C47 64 39 80 27 91" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"></path>
+  <g transform="rotate(-18 41 24)">
+    <path d="M12 24C15 36 23 47 37 51C51 47 61 35 70 24" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M26 35C28 41 32 47 37 51M55 34C51 42 44 48 37 51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+    <ellipse cx="41" cy="24" rx="29" ry="12" stroke="currentColor" stroke-width="2.6"></ellipse>
+    <g fill="currentColor">
+      <ellipse cx="28" cy="20" rx="3.3" ry="2.4"></ellipse>
+      <ellipse cx="42" cy="17" rx="3.5" ry="2.5"></ellipse>
+      <ellipse cx="56" cy="21" rx="3.3" ry="2.4"></ellipse>
+      <ellipse cx="23" cy="27" rx="3.2" ry="2.4"></ellipse>
+      <ellipse cx="38" cy="25" rx="3.5" ry="2.5"></ellipse>
+      <ellipse cx="53" cy="28" rx="3.3" ry="2.4"></ellipse>
+      <ellipse cx="39" cy="32" rx="3.3" ry="2.3"></ellipse>
+    </g>
+  </g>
+  <g data-loose-seeds="true" fill="currentColor">
+    <ellipse cx="58" cy="86" rx="5.2" ry="3.4" transform="rotate(-24 58 86)"></ellipse>
+    <ellipse cx="76" cy="92" rx="5" ry="3.3" transform="rotate(17 76 92)"></ellipse>
+    <ellipse cx="94" cy="85" rx="5.4" ry="3.5" transform="rotate(-36 94 85)"></ellipse>
+  </g>
+</svg>

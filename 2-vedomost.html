@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Падма · вариант 2 «Ведомость»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet">
+<style>
+:root{--bumaga:#f1ede4;--bumaga2:#e8e3d7;--tush:#141312;--seryy:#5f5a52;--krasnyy:#b8301b;--liniya:#141312;
+  --f:'Roboto Flex',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bumaga);color:var(--tush);font-family:var(--f);font-size:17px;line-height:1.5;font-variation-settings:"opsz" 16;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.pole{padding:0 clamp(16px,3vw,44px)}
+
+/* бегущая строка */
+.lenta{background:var(--tush);color:var(--bumaga);font-size:13px;letter-spacing:.02em;overflow:hidden;white-space:nowrap;height:36px;display:flex;align-items:center}
+.lenta .dvizh{display:inline-flex;animation:beg 60s linear infinite}
+.lenta span{padding-right:56px}
+.lenta b{color:#ff8a72;font-weight:600}
+@keyframes beg{to{transform:translateX(-50%)}}
+
+/* шапка-«титул» */
+.titul{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-top:18px;padding-bottom:16px;border-bottom:3px solid var(--liniya)}
+.titul .l{font-size:13px;color:var(--seryy);line-height:1.35}
+.titul .imya{display:flex;align-items:center;gap:12px;font-weight:800;font-size:30px;letter-spacing:.02em;font-variation-settings:"wdth" 130,"opsz" 40}
+.titul .imya img{width:36px}
+.titul .p{justify-self:end;display:flex;gap:26px;align-items:center;font-size:14px;font-weight:500}
+.titul .p a:hover{color:var(--krasnyy)}
+.knopka{display:inline-flex;align-items:center;gap:10px;background:var(--krasnyy);color:#fff;font-weight:600;font-size:15px;padding:15px 24px;transition:background .2s}
+.knopka:hover{background:#a5240f}
+.knopka.ch{background:var(--tush)}
+.knopka.ch:hover{background:#333}
+.titul .knopka{padding:10px 16px;font-size:14px}
+.razdely{display:flex;gap:30px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--liniya);font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.razdely span{color:var(--seryy);font-weight:400}
+
+/* заголовок-разворот */
+.ekran1{min-height:calc(100svh - 36px);display:flex;flex-direction:column}
+.razvorot{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(20px,3vh,40px);padding-bottom:clamp(20px,3vh,36px)}
+.st{display:block;width:max-content;white-space:nowrap;text-transform:uppercase;font-weight:860;line-height:.86;letter-spacing:-.01em;font-variation-settings:"wdth" var(--w,25),"opsz" 144;color:var(--tush)}
+.st.kr{color:var(--krasnyy)}
+.st+.st{margin-top:.04em}
+.podval1{display:grid;grid-template-columns:1.25fr 1fr 1fr;border-top:1px solid var(--liniya)}
+.podval1>div{padding:22px 26px 26px 0}
+.podval1>div+div{padding-left:26px;border-left:1px solid var(--liniya)}
+.lid{font-size:20px;line-height:1.42;font-variation-settings:"opsz" 24}
+.lid b{font-weight:650}
+.kol h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--krasnyy);margin-bottom:10px;font-weight:700}
+.kol ol{list-style:none;counter-reset:n}
+.kol li{counter-increment:n;display:grid;grid-template-columns:22px 1fr;font-size:15px;padding:5px 0;border-bottom:1px dotted rgba(20,19,18,.35)}
+.kol li::before{content:counter(n);font-weight:800;color:var(--krasnyy)}
+.kol li:last-child{border-bottom:0}
+.kol .knopka{margin-top:16px}
+.melko{font-size:13px;color:var(--seryy);margin-top:12px;line-height:1.4}
+
+/* второй экран */
+.ekran2{background:var(--bumaga2);border-top:3px solid var(--liniya);padding-top:90px;padding-bottom:110px}
+.cifra{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,70px);align-items:end;padding-bottom:60px;border-bottom:1px solid var(--liniya)}
+.bolshaya{font-weight:900;font-size:clamp(150px,24vw,380px);line-height:.78;color:var(--krasnyy);letter-spacing:-.04em;font-variation-settings:"wdth" 40,"opsz" 144;font-variant-numeric:tabular-nums}
+.bolshaya small{font-size:.42em;font-variation-settings:"wdth" 60}
+.cifra h2{font-size:clamp(26px,2.8vw,42px);line-height:1.12;font-weight:700;letter-spacing:-.01em;font-variation-settings:"wdth" 88,"opsz" 48;max-width:760px}
+.istochnik{margin-top:18px;font-size:13px;color:var(--seryy)}
+.istochnik a{text-decoration:underline}
+.vyvod{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;margin-top:0}
+.vyvod>div{padding:34px 26px 0 0}
+.vyvod>div+div{padding-left:26px;border-left:1px solid var(--liniya)}
+.vyvod .n{font-weight:900;font-size:44px;line-height:1;color:var(--krasnyy);font-variation-settings:"wdth" 50,"opsz" 144}
+.vyvod h3{font-size:21px;line-height:1.15;margin:14px 0 10px;font-weight:750;font-variation-settings:"wdth" 92,"opsz" 32}
+.vyvod p{font-size:15px;color:#3b3833}
+.vyvod a.dal{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;border-bottom:2px solid var(--krasnyy)}
+.tsitata{margin-top:80px;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;padding:28px 0;border-top:3px solid var(--liniya);border-bottom:1px solid var(--liniya)}
+.tsitata .kav{font-size:110px;line-height:.6;font-weight:900;color:var(--krasnyy);font-variation-settings:"wdth" 30}
+.tsitata p{font-size:clamp(22px,2.3vw,32px);line-height:1.2;font-weight:600;font-variation-settings:"wdth" 80,"opsz" 40}
+.tsitata p span{display:block;margin-top:10px;font-size:14px;font-weight:400;color:var(--seryy);font-variation-settings:"wdth" 100}
+
+.plashka{display:block;text-align:center;font-size:13px;padding:22px 16px;background:#000;color:#ddd}
+.plashka a{text-decoration:underline}
+
+@media (max-width:1000px){
+  .titul .p a:not(.knopka){display:none}
+  .podval1{grid-template-columns:1fr 1fr}
+  .podval1>div:first-child{grid-column:1/-1;border-bottom:1px solid var(--liniya);padding-right:0}
+  .podval1>div:nth-child(2){padding-left:0;border-left:0}
+  .vyvod{grid-template-columns:1fr 1fr}
+  .vyvod>div:nth-child(3){padding-left:0;border-left:0}
+  .vyvod>div:nth-child(n+3){margin-top:34px;border-top:1px solid var(--liniya)}
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  .titul{grid-template-columns:1fr auto;padding-top:12px;padding-bottom:12px}
+  .titul .l{display:none}
+  .titul .imya{font-size:24px}
+  .razdely{overflow-x:auto;gap:20px;white-space:nowrap}
+  .ekran1{min-height:auto}
+  .razvorot{padding-top:22px;padding-bottom:22px}
+  .podval1{grid-template-columns:1fr}
+  .podval1>div,.podval1>div+div{padding:18px 0;border-left:0;border-bottom:1px solid var(--liniya)}
+  .lid{font-size:18px}
+  .kol .knopka{width:100%;justify-content:center}
+  .ekran2{padding-top:60px;padding-bottom:80px}
+  .cifra{grid-template-columns:1fr;gap:18px;padding-bottom:40px}
+  .bolshaya{font-size:44vw}
+  .vyvod{grid-template-columns:1fr}
+  .vyvod>div,.vyvod>div+div{padding:26px 0 0;border-left:0}
+  .vyvod>div+div{margin-top:26px;border-top:1px solid var(--liniya)}
+  .tsitata{grid-template-columns:1fr;gap:12px;margin-top:56px}
+  .tsitata .kav{font-size:80px}
+  .tsitata .knopka{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.lenta .dvizh{animation:none}}
+</style>
+</head>
+<body>
+<div class="lenta" aria-hidden="true"><div class="dvizh" id="lenta">
+  <span><b>47 %</b> владельцев бизнеса первого поколения собираются нанять профессиональных управляющих — опрос СКОЛКОВО, 2021</span>
+  <span>Финальные интервью с кандидатами в руководители проводит <b>Виктория Головнёва</b></span>
+  <span>Гарантийная замена — <b>3 месяца</b></span>
+  <span>Ищем в России и за рубежом, в том числе среди тех, кто переехал</span>
+  <span>Название вашей компании кандидатам — <b>только с вашего разрешения</b></span>
+</div></div>
+
+<section class="ekran1">
+  <header class="pole">
+    <div class="titul">
+      <div class="l">Бюро кадровых стратегий<br>и бизнес-психологии · Москва</div>
+      <a class="imya" href="#"><img src="img/znak.svg" alt="">ПАДМА</a>
+      <div class="p"><a href="#">Подбор</a><a href="#">Подход</a><a href="#">Контакты</a><a class="knopka" href="#">Обсудить задачу</a></div>
+    </div>
+    <div class="razdely"><a href="#">Подбор руководителей</a><a href="#">Кадровая стратегия</a><a href="#">Сопровождение собственников</a><a href="#">Переговоры</a><span>· Москва и онлайн</span></div>
+  </header>
+
+  <div class="razvorot pole" id="razvorot">
+    <span class="st" data-w="70">Одно назначение</span>
+    <span class="st kr" data-w="70">меняет всю</span>
+    <span class="st" data-w="70">компанию.</span>
+  </div>
+
+  <div class="pole"><div class="podval1">
+    <div><p class="lid"><b>Подбираем руководителей для собственников бизнеса.</b> Поиск ведёт команда бюро, а финальных кандидатов в руководители оценивает основатель — психолог Виктория Головнёва, магистр психологии НИУ ВШЭ.</p></div>
+    <div class="kol"><h4>Что мы делаем</h4><ol><li>Подбор руководителей</li><li>Кадровая стратегия</li><li>Сопровождение собственников</li><li>Переговоры и партнёрства</li></ol></div>
+    <div class="kol"><h4>Условия</h4><ol><li>От 18 % годового дохода кандидата</li><li>Гарантийная замена — 3 месяца</li><li>Эксклюзивный поиск</li></ol><a class="knopka" href="#">Обсудить задачу →</a></div>
+  </div></div>
+</section>
+
+<section class="ekran2 pole">
+  <div class="cifra">
+    <div class="bolshaya" id="cifra" data-do="47">0<small>%</small></div>
+    <div>
+      <h2>владельцев бизнеса первого поколения собираются нанять профессиональных управляющих — и оставить за собой ключевые решения.</h2>
+      <p class="istochnik">Опрос СКОЛКОВО, 2021: 117 владельцев капитала больше 1 млн долларов. <a href="https://www.skolkovo.ru/news/rossijskie-millionery-ne-hotyat-ostavlyat-biznes-seme/" target="_blank" rel="noopener">Источник</a></p>
+    </div>
+  </div>
+  <div class="vyvod">
+    <div><div class="n">1</div><h3>Подбор руководителей</h3><p>Руководители и ключевые специалисты под задачи, культуру и этап развития компании.</p><a class="dal" href="#">Подробнее</a></div>
+    <div><div class="n">2</div><h3>Кадровая стратегия</h3><p>Ясные роли, найм под задачи бизнеса и условия, в которых сильные люди остаются.</p><a class="dal" href="#">Подробнее</a></div>
+    <div><div class="n">3</div><h3>Сопровождение собственников</h3><p>Передача бизнеса, приход в дело детей, распределение долей, управленческие переходы.</p><a class="dal" href="#">Подробнее</a></div>
+    <div><div class="n">4</div><h3>Переговоры и партнёрства</h3><p>Подготовка важных встреч, сопровождение переговоров, урегулирование конфликтов.</p><a class="dal" href="#">Подробнее</a></div>
+  </div>
+  <div class="tsitata">
+    <div class="kav">«</div>
+    <p>Мы выбираем людей не только по компетенциям, которые в резюме.<span>Виктория Головнёва, основатель бюро</span></p>
+    <a class="knopka ch" href="#">Обсудить задачу →</a>
+  </div>
+</section>
+
+<div class="plashka">Вариант 2 из 3 · <a href="./">все варианты</a></div>
+
+<script>
+(function(){
+  // бегущая строка: дублируем содержимое для бесшовного круга
+  var l=document.getElementById('lenta'); l.innerHTML+=l.innerHTML;
+
+  // заголовок: каждая строка подгоняется во всю ширину колонки при конечной ширине букв,
+  // затем буквы «раздвигаются» из узких в конечные
+  var raz=document.getElementById('razvorot'), st=raz.querySelectorAll('.st');
+  var tiho=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // один кегль на все строки (по высоте экрана и самой длинной строке в самых узких буквах),
+  // а во всю ширину каждую строку растягивает своя ширина букв (ось wdth 25…151)
+  function podognat(){
+    var cs=getComputedStyle(raz), w=raz.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    var maxH=innerHeight*(innerWidth<700?.42:.5);
+    var fs=maxH/(st.length*.9);
+    st.forEach(function(s){ s.style.fontSize='100px'; s.style.setProperty('--w',25); fs=Math.min(fs, w/s.scrollWidth*100*.995); });
+    st.forEach(function(s){
+      s.style.fontSize=fs+'px';
+      var lo=25, hi=151;
+      s.style.setProperty('--w',hi);
+      if(s.scrollWidth<=w){ s.dataset.w=hi; return; }
+      for(var i=0;i<14;i++){ var m=(lo+hi)/2; s.style.setProperty('--w',m); if(s.scrollWidth>w) hi=m; else lo=m; }
+      s.dataset.w=lo.toFixed(2); s.style.setProperty('--w',s.dataset.w);
+    });
+  }
+  function zapusk(){
+    podognat();
+    if(tiho) return;
+    st.forEach(function(s,i){
+      var kon=+s.dataset.w, t0=null, dl=1300, zd=i*140;
+      s.style.setProperty('--w',25);
+      function sh(now){ if(t0===null)t0=now+zd; var p=Math.min(1,Math.max(0,(now-t0)/dl)); var e=1-Math.pow(1-p,4);
+        s.style.setProperty('--w',(25+(kon-25)*e).toFixed(1)); if(p<1)requestAnimationFrame(sh); }
+      requestAnimationFrame(sh);
+    });
+  }
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(zapusk);
+  var tm; addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(podognat,120)});
+
+  // 47 %: счёт до цифры, когда блок в кадре
+  var c=document.getElementById('cifra'), gotovo=false;
+  new IntersectionObserver(function(z){ if(z[0].isIntersecting&&!gotovo){ gotovo=true; var t0=performance.now(), d=1400, to=+c.dataset.do;
+    (function sh(now){var p=Math.min(1,(now-t0)/d), e=1-Math.pow(1-p,3); c.firstChild.nodeValue=Math.round(to*e); if(p<1)requestAnimationFrame(sh)})(t0);
+  }},{threshold:.4}).observe(c);
+})();
+</script>
+</body>
+</html>

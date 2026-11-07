@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Падма · вариант 5 «Маршруты»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --farfor:#f6f5f1; --farfor2:#eeece6; --more:#13213a; --more2:#24375a; --slanets:#4a5366; --shampan:#b8955c; --shampan-t:#86683a;
+  --liniya:rgba(19,33,58,.14);
+  --disp:'Playfair Display',Georgia,serif; --text:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--farfor);color:var(--more);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.pole{padding-left:clamp(16px,4.5vw,80px);padding-right:clamp(16px,4.5vw,80px)}
+.metka{font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--shampan-t)}
+
+/* шапка */
+.shapka{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:30px;padding-top:24px;padding-bottom:20px}
+.marka{display:flex;align-items:baseline;gap:14px}
+.marka b{font-family:var(--disp);font-weight:500;font-size:28px;letter-spacing:.04em}
+.marka span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--slanets)}
+.shapka nav{display:flex;gap:30px;font-size:14px;color:var(--slanets)}
+.shapka nav a:hover{color:var(--more)}
+.shapka .pr{display:flex;align-items:center;gap:22px;font-size:13px;color:var(--slanets)}
+.yaz b{color:var(--more);font-weight:600}
+.knopka{display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:15px;padding:16px 28px;border-radius:999px;transition:background .3s,color .3s,box-shadow .3s}
+.knopka.more{background:var(--more);color:var(--farfor)}
+.knopka.more:hover{background:var(--more2);box-shadow:0 10px 30px rgba(19,33,58,.22)}
+.knopka.svet{border:1px solid var(--liniya);color:var(--more);background:rgba(246,245,241,.7);backdrop-filter:blur(6px)}
+.knopka.svet:hover{border-color:var(--more)}
+.shapka .knopka{padding:11px 20px;font-size:14px}
+
+/* первый экран: карта с маршрутами */
+.ekran1{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+#karta{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.ekran1::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,var(--farfor) 0%,rgba(246,245,241,.94) 30%,rgba(246,245,241,.35) 54%,rgba(246,245,241,0) 70%),
+             linear-gradient(0deg,var(--farfor) 0%,rgba(246,245,241,0) 22%)}
+.razvorot{flex:1;display:flex;align-items:center;padding-top:20px;padding-bottom:30px}
+.tekst{max-width:700px}
+h1{font-family:var(--disp);font-weight:400;font-size:clamp(44px,min(5.6vw,9.4svh),96px);line-height:1.02;letter-spacing:-.018em;margin:24px 0 28px}
+h1 em{font-style:italic;color:var(--more2)}
+h1 .s{display:block;overflow:hidden;padding-bottom:.04em}
+h1 .s>span{display:block;transform:translateY(102%);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.gotovo h1 .s>span{transform:none}
+h1 .s:nth-child(2)>span{transition-delay:.12s}h1 .s:nth-child(3)>span{transition-delay:.24s}
+.lid{max-width:540px;font-size:18px;line-height:1.62;color:var(--slanets)}
+.knopki{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.poyav{opacity:0;transform:translateY(12px);transition:opacity 1s .6s,transform 1s .6s}
+.gotovo .poyav{opacity:1;transform:none}
+.moskva{position:absolute;z-index:1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--more);pointer-events:none;transform:translate(14px,-50%);opacity:0;transition:opacity 1s 1.2s}
+.gotovo .moskva{opacity:.8}
+
+.opory{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--liniya)}
+.opory div{padding:20px 24px 24px;border-left:1px solid var(--liniya);font-size:14px;color:var(--slanets);line-height:1.45}
+.opory div:first-child{border-left:0;padding-left:0}
+.opory b{display:block;font-family:var(--disp);font-weight:500;font-size:20px;color:var(--more);margin-bottom:4px}
+
+/* второй экран */
+.ekran2{background:var(--farfor2);padding-top:120px;padding-bottom:120px}
+.ekran2 .verh{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);align-items:end;margin-bottom:56px}
+h2{font-family:var(--disp);font-weight:400;font-size:clamp(36px,4.2vw,64px);line-height:1.06;letter-spacing:-.012em;margin-top:16px}
+h2 em{font-style:italic;color:var(--more2)}
+.verh p{font-size:17px;color:var(--slanets);max-width:520px}
+.spisok{border-top:1px solid var(--more)}
+.punkt{display:grid;grid-template-columns:80px 1fr 1.1fr 40px;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--liniya);cursor:default;transition:padding .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.punkt .n{font-family:var(--disp);font-style:italic;font-size:30px;color:var(--shampan-t)}
+.punkt h3{font-family:var(--disp);font-weight:500;font-size:clamp(22px,2.1vw,30px);line-height:1.2}
+.punkt p{font-size:16px;color:var(--slanets);line-height:1.55}
+.punkt .str{justify-self:end;font-size:22px;color:var(--shampan);transition:transform .4s}
+.punkt:hover{background:linear-gradient(90deg,rgba(184,149,92,.08),rgba(184,149,92,0))}
+.punkt:hover .str{transform:translateX(6px)}
+.tishina{margin-top:70px;display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center;padding:32px 36px;background:var(--farfor);border:1px solid var(--liniya);border-radius:4px}
+.tishina .zamok{width:46px;height:46px;border-radius:50%;border:1px solid var(--shampan);display:grid;place-items:center;color:var(--shampan-t)}
+.tishina h4{font-family:var(--disp);font-weight:500;font-size:24px;line-height:1.2;margin-bottom:6px}
+.tishina p{font-size:15px;color:var(--slanets);max-width:720px}
+
+.plashka{display:block;text-align:center;font-size:13px;padding:22px 16px;background:#e6e3db;color:var(--slanets)}
+.plashka a{text-decoration:underline}
+
+@media (max-width:1100px){
+  .shapka nav{display:none}
+  .punkt{grid-template-columns:56px 1fr 30px}
+  .punkt p{grid-column:2/3}
+  .punkt .str{grid-row:1;grid-column:3}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .shapka{padding-top:14px;padding-bottom:12px}
+  .marka span,.shapka .yaz,.shapka .knopka{display:none}
+  .ekran1::before{background:linear-gradient(0deg,var(--farfor) 0%,rgba(246,245,241,.96) 52%,rgba(246,245,241,.2) 78%,rgba(246,245,241,.5) 100%)}
+  .razvorot{align-items:flex-end;padding-top:30svh;padding-bottom:26px}
+  h1{font-size:clamp(36px,10.4vw,48px);margin:16px 0 18px}
+  .lid{font-size:16px}
+  .knopki .knopka{flex:1 1 100%;justify-content:center}
+  .opory{grid-template-columns:1fr 1fr}
+  .opory div{padding:14px 10px 14px 0;border-left:0;border-bottom:1px solid var(--liniya)}
+  .opory div:nth-child(2n){padding-left:12px;border-left:1px solid var(--liniya)}
+  .opory div:nth-last-child(-n+2){border-bottom:0}
+  .ekran2{padding-top:80px;padding-bottom:80px}
+  .ekran2 .verh{grid-template-columns:1fr;gap:18px;margin-bottom:36px}
+  .punkt{grid-template-columns:40px 1fr;gap:6px 14px;padding:22px 0}
+  .punkt .str{display:none}
+  .punkt .n{font-size:24px}
+  .tishina{grid-template-columns:1fr;gap:16px;padding:24px 20px}
+  .tishina .knopka{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  h1 .s>span,.poyav,.moskva{transition:none!important;transform:none!important;opacity:1!important}
+}
+</style>
+</head>
+<body>
+<section class="ekran1" id="ekran1">
+  <canvas id="karta" aria-hidden="true"></canvas>
+  <div class="moskva" id="moskva">Москва</div>
+  <header class="shapka pole">
+    <a class="marka" href="#"><b>Падма</b><span>Бюро HR-стратегии и бизнес-психологии</span></a>
+    <nav><a href="#">Экспертиза</a><a href="#">О бюро</a><a href="#">Подход</a><a href="#">Конфиденциальность</a><a href="#">Контакты</a></nav>
+    <div class="pr"><span class="yaz"><b>RU</b> · EN</span><a class="knopka more" href="#">Обсудить задачу</a></div>
+  </header>
+
+  <div class="razvorot pole">
+    <div class="tekst">
+      <div class="metka poyav" style="transition-delay:.2s">Москва · Международные проекты</div>
+      <h1><span class="s"><span>Люди, отношения,</span></span><span class="s"><span>решения — <em>для развития</em></span></span><span class="s"><span><em>бизнеса.</em></span></span></h1>
+      <p class="lid poyav">Помогаем собственникам находить сильных руководителей, выстраивать отношения внутри команд и принимать решения о людях, с которыми предстоит создавать будущее компании.</p>
+      <div class="knopki poyav"><a class="knopka more" href="#">Обсудить задачу</a><a class="knopka svet" href="#zadachi">Когда мы полезны</a></div>
+    </div>
+  </div>
+
+  <div class="pole"><div class="opory poyav">
+    <div><b>Executive Search</b>в России и за рубежом, включая релокацию</div>
+    <div><b>Эксклюзивно</b>согласованно представляем компанию на рынке</div>
+    <div><b>Конфиденциально</b>без логотипов и узнаваемых историй</div>
+    <div><b>Ясные условия</b>формат и цену фиксируем до старта</div>
+  </div></div>
+</section>
+
+<section class="ekran2 pole" id="zadachi">
+  <div class="verh">
+    <div><div class="metka">Важные управленческие задачи</div><h2>Когда решение о людях становится <em>стратегическим.</em></h2></div>
+    <p>В решениях о людях редко бывает достаточно одной формальной оценки. Мы помогаем увидеть полную картину — бизнес-задачу, ожидания и отношения, — чтобы выбирать с большей ясностью.</p>
+  </div>
+  <div class="spisok">
+    <div class="punkt"><div class="n">1</div><h3>Нужен руководитель для нового этапа</h3><p>Важен не только опыт, но и способность брать ответственность, разделять ориентиры компании и действовать самостоятельно.</p><span class="str">→</span></div>
+    <div class="punkt"><div class="n">2</div><h3>Компания выходит на новый масштаб</h3><p>Прежние роли, структура и управленческие отношения уже не отвечают задачам развития.</p><span class="str">→</span></div>
+    <div class="punkt"><div class="n">3</div><h3>Предстоит непростое решение</h3><p>Нужен независимый взгляд на людей, управленческие риски и факторы, которые не всегда видны изнутри.</p><span class="str">→</span></div>
+    <div class="punkt"><div class="n">4</div><h3>Нужно восстановить диалог</h3><p>Различия в интересах партнёров или руководителей мешают договориться и двигаться дальше.</p><span class="str">→</span></div>
+  </div>
+  <div class="tishina">
+    <div class="zamok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="8.5" width="13" height="9" rx="1.5"/><path d="M6.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5"/></svg></div>
+    <div><h4>Доверие не требует публичности.</h4><p>Мы не размещаем на сайте названия компаний, логотипы и истории, по которым можно узнать клиентов. Партнёрства Падмы начинаются с личных рекомендаций.</p></div>
+    <a class="knopka more" href="#">Обсудить задачу</a>
+  </div>
+</section>
+
+<div class="plashka">Вариант 5 · <a href="./">все варианты</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.0/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(function(){
+  var d=document.documentElement, tiho=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('gotovo')})});
+  if(!window.d3||!window.topojson) return;   // без библиотек страница остаётся без карты, но целой
+
+  var cv=document.getElementById('karta'), ctx=cv.getContext('2d'), ek=document.getElementById('ekran1'), msk=document.getElementById('moskva');
+  var MOSKVA=[37.62,55.75];
+  // направления — без подписей: показывают географию поиска, а не офисы
+  var KUDA=[[-0.13,51.5],[55.27,25.2],[28.98,41.0],[103.8,1.35],[76.9,43.24],[121.47,31.23],[-74.0,40.71],[20.46,44.8],[44.79,41.72],[2.35,48.86],[8.54,47.37],[114.17,22.32],[69.24,41.3],[-3.7,40.42]];
+  var susha=null, proj, path, fon=document.createElement('canvas'), W,H,dpr, mal;
+
+  fetch('img/susha-110m.json').then(function(r){return r.json()}).then(function(t){ susha=topojson.feature(t,t.objects.land); ustroit(); zapusk(); }).catch(function(){});
+
+  function ustroit(){
+    dpr=Math.min(2,window.devicePixelRatio||1); W=ek.clientWidth; H=ek.clientHeight; mal=W<760;
+    cv.width=W*dpr; cv.height=H*dpr;
+    // масштаб и место: Москва встаёт в заданную точку экрана
+    var sc=mal? W*0.62 : Math.min(W*0.27,H*0.5);
+    proj=d3.geoNaturalEarth1().rotate([-45,0]).scale(sc).translate([0,0]);
+    var m0=proj(MOSKVA), cel=mal?[W*0.5,H*0.19]:[W*0.69,H*0.33];
+    proj.translate([cel[0]-m0[0],cel[1]-m0[1]]);
+    path=d3.geoPath(proj);
+    // точки суши: растрируем материки и ставим точку по сетке
+    var shag=mal?6:7, off=document.createElement('canvas'); off.width=W; off.height=H;
+    var o=off.getContext('2d'); o.fillStyle='#000'; o.beginPath(); d3.geoPath(proj,o)(susha); o.fill();
+    var px=o.getImageData(0,0,W,H).data;
+    fon.width=W*dpr; fon.height=H*dpr; var f=fon.getContext('2d'); f.scale(dpr,dpr);
+    for(var y=shag/2;y<H;y+=shag) for(var x=shag/2;x<W;x+=shag){
+      if(px[((y|0)*W+(x|0))*4+3]>0){ f.fillStyle='rgba(19,33,58,'+(0.17+0.12*Math.random())+')'; f.beginPath(); f.arc(x,y,1.15,0,6.283); f.fill(); }
+    }
+    var m=proj(MOSKVA); msk.style.left=m[0]+'px'; msk.style.top=m[1]+'px';
+  }
+
+  var dugi=[];
+  function zapusk(){
+    var t0=performance.now();
+    dugi=KUDA.map(function(k,i){ return {k:k, int:d3.geoInterpolate(MOSKVA,k), start:t0+400+i*650}; });
+    if(tiho){ risovat(t0+1e6,true); return; }
+    requestAnimationFrame(kadr);
+  }
+  var CIKL=9000, PROLET=1900;
+  function kadr(now){ risovat(now,false); requestAnimationFrame(kadr); }
+  function risovat(now,staticno){
+    ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(fon,0,0);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var m=proj(MOSKVA);
+    dugi.forEach(function(a){
+      var t=staticno?PROLET:((now-a.start)%CIKL+CIKL)%CIKL; if(!staticno&&now<a.start) return;
+      var p=Math.min(1,t/PROLET), ugas=staticno?1:(t>CIKL-1400?Math.max(0,(CIKL-t)/1400):1);
+      var e=1-Math.pow(1-p,3), N=60, pts=[];
+      for(var j=0;j<=N*e;j++){ var q=proj(a.int(j/N)); if(q) pts.push(q); }
+      if(pts.length<2) return;
+      // дуга приподнята над землёй: смещаем середину пути вверх
+      var A=pts[0], B=proj(a.k), len=Math.hypot(B[0]-A[0],B[1]-A[1]);
+      ctx.beginPath();
+      pts.forEach(function(q,j){ var s=j/N, h=Math.sin(Math.PI*s)*len*0.13; ctx[j?'lineTo':'moveTo'](q[0],q[1]-h); });
+      ctx.strokeStyle='rgba(19,33,58,'+(0.55*ugas)+')'; ctx.lineWidth=1.1; ctx.stroke();
+      var last=pts[pts.length-1], sl=(pts.length-1)/N, hl=Math.sin(Math.PI*sl)*len*0.13;
+      ctx.fillStyle='rgba(184,149,92,'+ugas+')'; ctx.beginPath(); ctx.arc(last[0],last[1]-hl,p<1?2.6:2.2,0,6.283); ctx.fill();
+      if(p>=1){ ctx.strokeStyle='rgba(184,149,92,'+(0.5*ugas)+')'; ctx.beginPath(); ctx.arc(B[0],B[1],5,0,6.283); ctx.stroke(); }
+    });
+    // Москва
+    ctx.fillStyle='#13213a'; ctx.beginPath(); ctx.arc(m[0],m[1],3.4,0,6.283); ctx.fill();
+    var pul=staticno?0:(now%2400)/2400;
+    ctx.strokeStyle='rgba(19,33,58,'+(0.45*(1-pul))+')'; ctx.beginPath(); ctx.arc(m[0],m[1],4+pul*16,0,6.283); ctx.stroke();
+  }
+  var tm; addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(function(){ if(susha){ ustroit(); if(tiho) risovat(1e9,true);} },150); });
+})();
+</script>
+</body>
+</html>

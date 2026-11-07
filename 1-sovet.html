@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Падма · вариант 1 «Совет директоров»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Wix+Madefor+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noch:#0d0c0b; --noch2:#151311; --kost:#efe9df; --kost2:#b9b1a5; --latun:#c4a06a; --latun2:#e2c592;
+  --liniya:rgba(239,233,223,.14);
+  --disp:'Unbounded',system-ui,sans-serif; --text:'Wix Madefor Text',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--noch);color:var(--kost);font-family:var(--text);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* шапка */
+.shapka{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,56px);transition:background .4s,padding .4s}
+.shapka.plotno{background:rgba(13,12,11,.86);backdrop-filter:blur(10px);padding-top:14px;padding-bottom:14px}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:400;font-size:17px;letter-spacing:.06em}
+.logo img{width:34px;height:auto;filter:brightness(0) invert(.82) sepia(.5) saturate(2.2) hue-rotate(-8deg)}
+.menu{display:flex;gap:34px;font-size:14px;color:var(--kost2)}
+.menu a:hover{color:var(--kost)}
+.knopka{display:inline-flex;align-items:center;gap:10px;font-family:var(--text);font-weight:600;font-size:15px;padding:15px 26px;border-radius:2px;transition:background .25s,color .25s,border-color .25s}
+.knopka.zoloto{background:var(--latun);color:#17130d}
+.knopka.zoloto:hover{background:var(--latun2)}
+.knopka.kontur{border:1px solid var(--liniya);color:var(--kost)}
+.knopka.kontur:hover{border-color:var(--latun)}
+.shapka .knopka{padding:11px 20px;font-size:14px}
+
+/* первый экран */
+.ekran1{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;overflow:hidden;isolation:isolate}
+.foto{position:absolute;inset:0 0 0 auto;width:62%;z-index:-3}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:46% 22%;transform:scale(1.06);transition:transform 2.6s cubic-bezier(.2,.7,.2,1)}
+.zagruzheno .foto img{transform:scale(1)}
+.foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--noch) 0%,rgba(13,12,11,.75) 22%,rgba(13,12,11,0) 55%),linear-gradient(0deg,var(--noch) 0%,rgba(13,12,11,0) 30%)}
+/* луч: темнота поверх всего кадра, вокруг курсора — свет */
+.luch{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:rgba(8,7,6,.78);
+  -webkit-mask:radial-gradient(circle var(--r,300px) at var(--x,72%) var(--y,36%),transparent 0,transparent 35%,#000 100%);
+          mask:radial-gradient(circle var(--r,300px) at var(--x,72%) var(--y,36%),transparent 0,transparent 35%,#000 100%)}
+.zerno{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.tekst1{align-self:end;padding:118px clamp(16px,4vw,56px) 44px;max-width:860px}
+.nadpis{display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--latun)}
+.nadpis::before{content:"";width:42px;height:1px;background:var(--latun)}
+h1{font-family:var(--disp);font-weight:300;font-size:clamp(40px,min(5.4vw,8.6svh),88px);line-height:1.02;letter-spacing:-.03em;margin:22px 0 24px}
+h1 .s{display:block;overflow:hidden}
+h1 .s span{display:block;transform:translateY(105%);transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.zagruzheno h1 .s span{transform:none}
+h1 .s:nth-child(2) span{transition-delay:.12s}
+h1 .s:nth-child(3) span{transition-delay:.24s}
+h1 em{font-style:normal;color:var(--latun2)}
+.podzag{max-width:560px;color:var(--kost2);font-size:18px}
+.podzag b{color:var(--kost);font-weight:500}
+.knopki{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.poyav{opacity:0;transform:translateY(16px);transition:opacity .9s .5s,transform .9s .5s}
+.zagruzheno .poyav{opacity:1;transform:none}
+
+.fakty{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--liniya);background:linear-gradient(0deg,rgba(13,12,11,.92),rgba(13,12,11,.6))}
+.fakt{padding:26px clamp(16px,2.4vw,36px);border-right:1px solid var(--liniya)}
+.fakt:last-child{border-right:0}
+.fakt b{display:block;font-family:var(--disp);font-weight:400;font-size:clamp(20px,2vw,28px);color:var(--kost);letter-spacing:-.01em}
+.fakt span{display:block;margin-top:6px;font-size:14px;color:var(--kost2);line-height:1.45}
+.podskazka{position:absolute;right:clamp(16px,4vw,56px);top:50%;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(239,233,223,.42);writing-mode:vertical-rl}
+
+/* второй экран */
+.ekran2{position:relative;padding:140px clamp(16px,4vw,56px) 150px;background:var(--noch2);border-top:1px solid var(--liniya)}
+.ekran2 .verh{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end;margin-bottom:84px}
+h2{font-family:var(--disp);font-weight:300;font-size:clamp(32px,4vw,60px);line-height:1.06;letter-spacing:-.025em}
+h2 em{font-style:normal;color:var(--latun2)}
+.verh p{color:var(--kost2);max-width:460px}
+.shkala{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+.shkala::before{content:"";position:absolute;left:0;right:0;top:27px;height:1px;background:var(--liniya)}
+.shkala::after{content:"";position:absolute;left:0;top:27px;height:1px;width:calc(var(--p,0)*100%);background:var(--latun);transition:width .2s linear}
+.shag{position:relative;padding-right:28px}
+.shag .n{position:relative;z-index:1;display:grid;place-items:center;width:55px;height:55px;border-radius:50%;background:var(--noch2);border:1px solid var(--liniya);font-family:var(--disp);font-weight:400;font-size:18px;color:var(--kost2);transition:border-color .4s,color .4s,background .4s}
+.shag.est .n{border-color:var(--latun);color:#17130d;background:var(--latun)}
+.shag h3{font-family:var(--text);font-weight:600;font-size:17px;margin:26px 0 10px;line-height:1.3}
+.shag p{font-size:15px;color:var(--kost2);line-height:1.5}
+.shag .kto{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--latun)}
+.nda{margin-top:90px;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:30px 34px;border:1px solid var(--liniya)}
+.nda p{max-width:720px;color:var(--kost2)}
+.nda p b{color:var(--kost);font-weight:500}
+
+.plashka{display:block;text-align:center;font-size:13px;padding:22px 16px;background:#000;color:#ddd}
+.plashka a{text-decoration:underline}
+
+@media (max-width:1000px){
+  .menu{display:none}
+  .shkala{grid-template-columns:repeat(3,1fr);row-gap:50px}
+  .shkala::before,.shkala::after{display:none}
+  .ekran2 .verh{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  .shapka{padding:14px 16px}
+  .shapka .knopka{display:none}
+  .foto{width:100%;height:66svh;inset:0 0 auto 0}
+  .foto img{object-position:47% 18%}
+  .foto::after{background:linear-gradient(0deg,var(--noch) 2%,rgba(13,12,11,.55) 30%,rgba(13,12,11,0) 58%)}
+  .tekst1{padding:52svh 16px 34px}
+  h1{font-size:clamp(34px,10vw,46px);margin:18px 0 18px}
+  .podzag{font-size:16px}
+  .knopki .knopka{flex:1 1 100%;justify-content:center}
+  .fakty{grid-template-columns:1fr 1fr}
+  .fakt{border-bottom:1px solid var(--liniya)}
+  .fakt:nth-child(2n){border-right:0}
+  .podskazka{display:none}
+  .ekran2{padding:90px 16px 100px}
+  .ekran2 .verh{margin-bottom:56px}
+  .shkala{grid-template-columns:1fr;row-gap:34px}
+  .shag{display:grid;grid-template-columns:55px 1fr;column-gap:18px;padding:0}
+  .shag h3{margin:4px 0 6px}
+  .shag p,.shag .kto{grid-column:2}
+  .nda{flex-direction:column;align-items:flex-start;padding:24px 20px;margin-top:60px}
+}
+@media (prefers-reduced-motion:reduce){
+  h1 .s span,.poyav,.foto img{transition:none!important;transform:none!important;opacity:1!important}
+}
+</style>
+</head>
+<body>
+<header class="shapka" id="shapka">
+  <a class="logo" href="#"><img src="img/znak.svg" alt="">Падма</a>
+  <nav class="menu"><a href="#poisk">Подбор руководителей</a><a href="#poisk">Как мы ищем</a><a href="#">Основатель</a><a href="#">Контакты</a></nav>
+  <a class="knopka zoloto" href="#">Обсудить задачу</a>
+</header>
+
+<section class="ekran1" id="ekran1">
+  <div class="foto"><picture><source srcset="img/viktoriya-geroy-v2.webp" type="image/webp"><img src="img/viktoriya-geroy-v2.jpg" alt="Виктория Головнёва, основатель бюро Падма" fetchpriority="high"></picture></div>
+  <div class="luch" id="luch"></div>
+  <div class="zerno"></div>
+  <div class="podskazka">Ведите курсором — свет за вами</div>
+
+  <div class="tekst1">
+    <div class="nadpis poyav">Подбор руководителей · Москва и весь мир</div>
+    <h1><span class="s"><span>Человек, которому</span></span><span class="s"><span>вы отдадите</span></span><span class="s"><span><em>ключи.</em></span></span></h1>
+    <p class="podzag poyav">Ищем руководителей для собственников бизнеса. Финальные интервью с кандидатами проводит <b>основатель бюро — психолог Виктория Головнёва</b>.</p>
+    <div class="knopki poyav"><a class="knopka zoloto" href="#">Обсудить задачу →</a><a class="knopka kontur" href="#poisk">Как мы ищем</a></div>
+  </div>
+
+  <div class="fakty poyav">
+    <div class="fakt"><b>от 18 %</b><span>годового фиксированного дохода кандидата до НДФЛ</span></div>
+    <div class="fakt"><b>3 месяца</b><span>одна гарантийная замена входит в цену</span></div>
+    <div class="fakt"><b>Эксклюзивно</b><span>исполнителя и условия закрепляем до старта</span></div>
+    <div class="fakt"><b>По всему миру</b><span>в том числе среди тех, кто переехал</span></div>
+  </div>
+</section>
+
+<section class="ekran2" id="poisk">
+  <div class="verh">
+    <h2>Шесть шагов —<br>и <em>один человек</em><br>за вашим столом.</h2>
+    <p>Поиск ведут рекрутеры Падмы, обученные методике Виктории. С финалистами встречается она сама: опыт, мотивация, как человек работает с людьми.</p>
+  </div>
+  <div class="shkala" id="shkala">
+    <div class="shag"><div class="n">1</div><h3>Погружение в компанию</h3><p>Говорим о компании, роли, команде и о том, почему понадобился новый человек.</p></div>
+    <div class="shag"><div class="n">2</div><h3>Условия поиска</h3><p>Фиксируем, кто ведёт проект, критерии, этапы и оплату.</p></div>
+    <div class="shag"><div class="n">3</div><h3>Рынок и поиск</h3><p>Ищем по своим каналам и на рынке. Первые интервью — рекрутеры.</p></div>
+    <div class="shag"><div class="n">4</div><h3>Финальные интервью</h3><p>С кандидатами в руководители встречается Виктория.</p><span class="kto">Лично основатель</span></div>
+    <div class="shag"><div class="n">5</div><h3>Встречи и выбор</h3><p>Готовим вас и кандидата к встрече, помогаем обсудить ожидания и условия.</p></div>
+    <div class="shag"><div class="n">6</div><h3>Выход в роль</h3><p>Договариваемся о первых шагах и о том, когда вместе посмотрим, как идут дела.</p></div>
+  </div>
+  <div class="nda">
+    <p><b>Поиск ведём от имени бюро.</b> Название вашей компании кандидатам называем, только когда вы разрешите.</p>
+    <a class="knopka zoloto" href="#">Обсудить задачу →</a>
+  </div>
+</section>
+
+<div class="plashka">Вариант 1 из 3 · <a href="./">все варианты</a></div>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('zagruzheno')})});
+  var shapka=document.getElementById('shapka');
+  addEventListener('scroll',function(){shapka.classList.toggle('plotno',scrollY>40)},{passive:true});
+
+  // луч света: следует за курсором/пальцем; без касания — медленно дышит вокруг лица
+  var luch=document.getElementById('luch'), ek=document.getElementById('ekran1');
+  var tx=.72,ty=.34,x=tx,y=ty,ruchnoy=0,t0=performance.now();
+  var mal=matchMedia('(max-width:700px)');
+  function centr(){ if(mal.matches){tx=.5;ty=.24}else{tx=.7;ty=.34} }
+  centr(); mal.addEventListener('change',centr);
+  function kuda(e){var r=ek.getBoundingClientRect();var p=e.touches?e.touches[0]:e;tx=(p.clientX-r.left)/r.width;ty=(p.clientY-r.top)/r.height;ruchnoy=performance.now()}
+  ek.addEventListener('pointermove',kuda);ek.addEventListener('touchmove',kuda,{passive:true});
+  var tiho=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function kadr(now){
+    if(now-ruchnoy>2500){ var t=(now-t0)/1000; centr(); tx+=Math.sin(t*.5)*.05; ty+=Math.cos(t*.37)*.035; }
+    x+=(tx-x)*.08; y+=(ty-y)*.08;
+    var r=Math.max(ek.clientWidth,ek.clientHeight)*(mal.matches?.55:.36);
+    luch.style.setProperty('--x',(x*100)+'%');luch.style.setProperty('--y',(y*100)+'%');luch.style.setProperty('--r',r+'px');
+    if(!tiho) requestAnimationFrame(kadr);
+  }
+  requestAnimationFrame(kadr);
+
+  // шкала шагов заполняется прокруткой
+  var sh=document.getElementById('shkala'), shagi=sh.querySelectorAll('.shag');
+  function shkala(){
+    var r=sh.getBoundingClientRect(), vh=innerHeight;
+    var p=Math.min(1,Math.max(0,(vh*.85-r.top)/(r.height+vh*.35)));
+    sh.style.setProperty('--p',p);
+    shagi.forEach(function(s,i){s.classList.toggle('est',p>=(i+.5)/shagi.length||s.getBoundingClientRect().top<vh*.6&&mal.matches)});
+  }
+  addEventListener('scroll',shkala,{passive:true});shkala();
+})();
+</script>
+</body>
+</html>
